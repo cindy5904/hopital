@@ -22,6 +22,40 @@ public class ConsultationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        String path = req.getPathInfo();
+        switch (path) {
+            case "/create":
+                newConsultation(req,resp);
+                break;
+            case "/update":
+                editConsultation(req,resp);
+                break;
+            case "/delete":
+                deleteConsultation(req,resp);
+                break;
+            case "/details":
+                detailConsultation(req,resp);
+                break;
+            case "/list" :
+                allConsultation(req,resp);
+                break;
+            default:
+                resp.sendRedirect("index.jsp");
+        }
+    }
+
+    private void newConsultation(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void editConsultation(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void deleteConsultation(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void detailConsultation(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void allConsultation(HttpServletRequest req, HttpServletResponse resp) {
     }
 }

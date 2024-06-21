@@ -106,4 +106,17 @@ public class ConsultationRepository extends BaseRepository<Consultation> {
 
         return result;
     }
+
+    public List<Consultation> findByPatientId(int patientId) {
+        List<Consultation> consultations = null;
+        try {
+            session = sessionFactory.openSession();
+            consultations = session.createQuery("FROM Consultation WHERE patient.id = :patientId", Consultation.class)
+                    .setParameter("patientId", patientId)
+                    .list();
+        } finally {
+            session.close();
+        }
+        return consultations;
+    }
 }

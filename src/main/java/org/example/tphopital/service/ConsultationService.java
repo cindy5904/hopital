@@ -40,4 +40,7 @@ public class ConsultationService {
     }
 
 
+    public List<Consultation> findByPatientId(int patientId) {
+        return consultationRepository.findByPatientId(patientId);
+    }
 }

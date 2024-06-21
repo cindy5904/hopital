@@ -4,21 +4,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.example.tphopital.model.Consultation;
 import org.example.tphopital.model.Patient;
+import org.example.tphopital.service.ConsultationService;
 import org.example.tphopital.service.PatientService;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @MultipartConfig(maxFileSize = 1024*1024*10)
 @WebServlet(name="patient", value="/patient/*")
 public class PatientServlet extends HttpServlet {
     private PatientService patientService;
+    private ConsultationService consultationService;
 
     @Override
     public void init() throws ServletException {
         patientService = new PatientService();
+        consultationService = new ConsultationService();
     }
 
     @Override
@@ -93,7 +98,9 @@ public class PatientServlet extends HttpServlet {
         if(req.getParameter("id")  != null){
             int id = Integer.parseInt(req.getParameter("id"));
             Patient patient = patientService.findById(id);
+            List<Consultation> consultations = patient.getConsultations();
             req.setAttribute("patient",patient);
+            req.setAttribute("cosultations", consultations);
             req.getRequestDispatcher("/WEB-INF/patient.jsp").forward(req,resp);
         }else {
             req.setAttribute("patients",patientService.findAll());
