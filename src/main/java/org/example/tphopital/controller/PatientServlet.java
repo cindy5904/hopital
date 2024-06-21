@@ -99,8 +99,9 @@ public class PatientServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("id"));
             Patient patient = patientService.findById(id);
             List<Consultation> consultations = patient.getConsultations();
-            req.setAttribute("patient",patient);
             req.setAttribute("consultations", consultations);
+            req.setAttribute("patient",patient);
+
             req.getRequestDispatcher("/WEB-INF/patient.jsp").forward(req,resp);
         }else {
             req.setAttribute("patients",patientService.findAll());

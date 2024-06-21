@@ -16,7 +16,7 @@ public class Patient {
     private LocalDate dateOfBirth;
     private String url;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private List<Consultation> consultations = new ArrayList<>();
 
     public Patient() {

@@ -16,7 +16,9 @@ public class PatientService {
     }
 
     public Patient findById(int id) {
-        return patientRepository.finfById(id);
+        Patient patient = patientRepository.finfById(id);
+        patient.getConsultations();
+        return patient;
     }
 
     public Patient update(int id, String lastName, String firstName, LocalDate dateOfBirth, String Url) {
